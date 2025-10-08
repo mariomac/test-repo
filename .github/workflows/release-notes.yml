@@ -1,7 +1,8 @@
 name: Release
 on:
   release:
-    types: [created]
+    types:
+      - published
 
 jobs:
   release-notes:
@@ -17,9 +18,10 @@ jobs:
         id: release-notes
         uses: mariomac/linked-release-notes@v0.0.3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          submodule-path: 'opentelemetry-ebpf-instrumentation'
-          submodule-repository: 'open-telemetry/opentelemetry-ebpf-instrumentation'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          submodule_path: 'opentelemetry-ebpf-instrumentation'
+          submodule_repository: 'open-telemetry/opentelemetry-ebpf-instrumentation'
+          tag: ${{ github.event.release.tag_name }}
 
       - name: Update Release with Notes
         if: steps.release-notes.outputs.has-submodule-changes == 'true'
