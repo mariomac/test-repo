@@ -16,15 +16,12 @@ jobs:
 
       - name: Generate Release Notes
         id: release-notes
-        uses: mariomac/linked-release-notes@v0.0.3
+        uses: mariomac/linked-release-notes@v0.0.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          submodule_path: 'opentelemetry-ebpf-instrumentation'
-          submodule_repository: 'open-telemetry/opentelemetry-ebpf-instrumentation'
           tag: ${{ github.event.release.tag_name }}
 
       - name: Update Release with Notes
-        if: steps.release-notes.outputs.has-submodule-changes == 'true'
         run: |
           echo "Submodule has changes!"
           echo "${{ steps.release-notes.outputs.release-notes }}"
