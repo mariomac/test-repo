@@ -1,0 +1,28 @@
+name: Release
+on:
+  release:
+    types: [created]
+
+jobs:
+  release-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Generate Release Notes
+        id: release-notes
+        uses: mariomac/linked-release-notes@v0.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          submodule-path: 'opentelemetry-ebpf-instrumentation'
+          submodule-repository: 'open-telemetry/opentelemetry-ebpf-instrumentation'
+
+      - name: Update Release with Notes
+        if: steps.release-notes.outputs.has-submodule-changes == 'true'
+        run: |
+          echo "Submodule has changes!"
+          echo "${{ steps.release-notes.outputs.release-notes }}"
