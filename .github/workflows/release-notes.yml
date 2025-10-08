@@ -24,4 +24,4 @@ jobs:
       - name: Update Release with Notes
         run: |
           echo "Submodule has changes!"
-          echo "${{ steps.release-notes.outputs.release-notes }}"
+          echo "${{ steps.release-notes.outputs.release_notes }}"
