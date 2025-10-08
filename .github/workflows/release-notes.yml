@@ -15,7 +15,7 @@ jobs:
 
       - name: Generate Release Notes
         id: release-notes
-        uses: mariomac/linked-release-notes@v0.0.2
+        uses: mariomac/linked-release-notes@v0.0.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           submodule-path: 'opentelemetry-ebpf-instrumentation'
