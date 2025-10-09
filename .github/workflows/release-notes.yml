@@ -18,10 +18,11 @@ jobs:
 
       - name: Generate Release Notes
         id: release-notes
-        uses: mariomac/linked-release-notes@v0.0.6
+        uses: mariomac/linked-release-notes@v0.0.7
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.release.tag_name }}
+          generated_submodule_link: foo/bar
 
       - name: Update Release with Notes
         env:
