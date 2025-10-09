@@ -4,11 +4,10 @@ on:
     types:
       - published
 
-permissions: write-all
-
 jobs:
   release-notes:
-    permissions: write-all
+    permissions:
+      repository-projects: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
